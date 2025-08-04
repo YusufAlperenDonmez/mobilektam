@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mobilektam/views/customers_page.dart';
+import 'package:mobilektam/views/data_transfer_page.dart';
 import 'package:mobilektam/views/login_page.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:mobilektam/views/menu_page.dart';
+import 'package:mobilektam/views/note_page.dart';
+import 'package:mobilektam/views/product_page.dart';
+import 'package:mobilektam/views/reporting_page.dart';
 
 void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -8,11 +14,44 @@ void main() {
   runApp(const MainApp());
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   const MainApp({super.key});
 
   @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  @override
+  void initState() {
+    super.initState();
+    // Remove splash after first frame
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      FlutterNativeSplash.remove();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: LoginPage());
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      builder: (context, child) {
+        ErrorWidget.builder = (FlutterErrorDetails errorDetails) {
+          return Scaffold(
+            body: Center(child: Text(errorDetails.exceptionAsString())),
+          );
+        };
+        return child!;
+      },
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const LoginPage(),
+        '/products': (context) => const ProductPage(),
+        '/customers': (context) => const CustomersPage(),
+        '/data-transfer': (context) => const DataTransferPage(),
+        '/reporting': (context) => const ReportingPage(),
+        '/notes': (context) => const NotePage(),
+      },
+    );
   }
 }
