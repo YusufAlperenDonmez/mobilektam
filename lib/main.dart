@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mobilektam/views/login_page.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const MainApp());
 }
 
@@ -10,8 +13,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: LoginPage(), // Change this line to use LoginPage
-    );
+    return const MaterialApp(home: LoginPage());
   }
 }
