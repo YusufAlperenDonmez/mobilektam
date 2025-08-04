@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:mobilektam/views/menu_page.dart';
 
 enum ShapeType { circle, rectangle }
 
@@ -91,7 +92,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   SizedBox(
-                    width: 250, // Reduced width
+                    width: 300, // Reduced width
                     child: TextFormField(
                       controller: usernameController,
                       decoration: const InputDecoration(
@@ -109,7 +110,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 12), // Slightly reduced vertical space
                   SizedBox(
-                    width: 250, // Reduced width
+                    width: 300, // Reduced width
                     child: TextFormField(
                       controller: passwordController,
                       obscureText: true,
@@ -155,6 +156,12 @@ class LoginPage extends StatelessWidget {
                           );
                         } else {
                           // TODO: Implement login logic
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const MenuPage(),
+                            ),
+                          );
                         }
                       },
                       child: const Text(
