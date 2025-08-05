@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProductPage extends StatefulWidget {
@@ -84,7 +85,7 @@ class _ProductCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            const Icon(Icons.barcode_reader, size: 32),
+            const Icon(CupertinoIcons.barcode_viewfinder, size: 32),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
