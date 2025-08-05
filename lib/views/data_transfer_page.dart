@@ -10,6 +10,16 @@ class DataTransferPage extends StatefulWidget {
 class _DataTransferPageState extends State<DataTransferPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    final primaryColor = const Color.fromARGB(255, 67, 78, 177);
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Veri Aktarımı',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: primaryColor,
+        iconTheme: const IconThemeData(color: Colors.white, size: 28),
+      ),
+    );
   }
 }
