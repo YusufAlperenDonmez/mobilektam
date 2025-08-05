@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mobilektam/views/menu_page.dart';
 
 enum ShapeType { circle, rectangle }
@@ -93,6 +94,9 @@ class LoginPage extends StatelessWidget {
                   SizedBox(
                     width: 300, // Reduced width
                     child: TextFormField(
+                      inputFormatters: [
+                        FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                      ],
                       controller: usernameController,
                       decoration: const InputDecoration(
                         labelText: 'Kullanıcı Adı',
@@ -111,6 +115,9 @@ class LoginPage extends StatelessWidget {
                   SizedBox(
                     width: 300, // Reduced width
                     child: TextFormField(
+                      inputFormatters: [
+                        FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                      ],
                       controller: passwordController,
                       obscureText: true,
                       decoration: const InputDecoration(
