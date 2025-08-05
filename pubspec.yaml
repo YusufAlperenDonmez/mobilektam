@@ -7,22 +7,23 @@ environment:
   sdk: ^3.8.1
 
 dependencies:
+  cupertino_icons: ^1.0.8
   flutter:
     sdk: flutter
-  flutter_inner_shadow: ^0.0.1
   flutter_native_splash: ^2.4.6
 
 flutter_native_splash:
   android: true
   ios: true
   web: false
-  color: "#42a5f5"
+  color: "#D7E9F1"
+  #branding: assets/brandingbig.png
+  #branding_bottom_padding: 24
 
   android_12:
-    image: assets\ektamlogo.jpg
-    icon_background_color: "#ffffff"
-    icon_background_color_dark: "#121212"
-
+    image: assets\ektamcon.jpg
+    #branding: assets/brandingbig.png
+    #branding_bottom_padding: 24
 
 dev_dependencies:
   flutter_test:
@@ -34,3 +35,6 @@ flutter:
 
   assets:
     - assets/ektamlogo.jpg
+    - assets/ektamcon.jpg
+    - assets/branding.png
+    - assets/brandingbig.png
