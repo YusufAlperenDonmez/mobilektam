@@ -68,14 +68,14 @@ class _CustomerCard extends StatelessWidget {
   final String name;
   final String? details;
 
-  const _CustomerCard({required this.name, this.details, super.key});
+  const _CustomerCard({required this.name, this.details});
 
   @override
   Widget build(BuildContext context) {
     return Material(
       elevation: 2,
       borderRadius: BorderRadius.circular(12),
-      shadowColor: Colors.black.withOpacity(0.15),
+      shadowColor: Colors.black.withValues(alpha: 0.15),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:mobilektam/views/menu_page.dart';
 
 enum ShapeType { circle, rectangle }
@@ -29,7 +28,7 @@ class LoginPage extends StatelessWidget {
     final TextEditingController passwordController = TextEditingController();
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 215, 233, 241), //
+      backgroundColor: const Color.fromARGB(255, 215, 233, 241),
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -201,7 +200,7 @@ class ShapePainter extends CustomPainter {
         // Draw shadow for rectangle
         canvas.drawShadow(
           Path()..addRect(rect),
-          Colors.black.withOpacity(0.3),
+          Colors.black.withValues(alpha: 0.3),
           8.0,
           false,
         );
@@ -214,7 +213,7 @@ class ShapePainter extends CustomPainter {
         canvas.drawShadow(
           Path()
             ..addOval(Rect.fromCircle(center: shape.offset, radius: radius)),
-          Colors.black.withOpacity(0.5),
+          Colors.black.withValues(alpha: 0.5),
           8.0,
           false,
         );
