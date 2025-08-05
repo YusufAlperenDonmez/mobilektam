@@ -3,7 +3,6 @@ import 'package:mobilektam/views/customers_page.dart';
 import 'package:mobilektam/views/data_transfer_page.dart';
 import 'package:mobilektam/views/login_page.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:mobilektam/views/menu_page.dart';
 import 'package:mobilektam/views/note_page.dart';
 import 'package:mobilektam/views/product_page.dart';
 import 'package:mobilektam/views/reporting_page.dart';
