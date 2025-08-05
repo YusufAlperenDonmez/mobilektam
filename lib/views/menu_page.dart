@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mobilektam/views/login_page.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -35,7 +34,8 @@ class _MenuPageState extends State<MenuPage> {
     );
 
     if (confirmed == true) {
-      Navigator.of(context).pop(); // or your actual logout logic
+      //Navigator.of(context).pop(); // or your actual logout logic
+      Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
     }
   }
 
