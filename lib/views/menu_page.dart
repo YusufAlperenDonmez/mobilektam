@@ -53,14 +53,12 @@ class _MenuPageState extends State<MenuPage> {
       {'label': 'Not Al', 'icon': Icons.sticky_note_2, 'route': '/notes'},
     ];
 
-    final primaryColor = const Color.fromARGB(255, 67, 78, 177);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           'EKTAM LTD. 2025',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: primaryColor,
         actions: [
           IconButton(
             iconSize: 28,

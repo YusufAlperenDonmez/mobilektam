@@ -34,6 +34,17 @@ class _MainAppState extends State<MainApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        // ✅ Set global primary color
+        primaryColor: const Color(0xFF434EB1),
+
+        // ✅ Customize app bar theme
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFF434EB1),
+          foregroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.white, size: 28),
+        ),
+      ),
       builder: (context, child) {
         ErrorWidget.builder = (FlutterErrorDetails errorDetails) {
           return Scaffold(

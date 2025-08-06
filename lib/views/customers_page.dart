@@ -10,12 +10,9 @@ class CustomersPage extends StatefulWidget {
 class _CustomersPageState extends State<CustomersPage> {
   @override
   Widget build(BuildContext context) {
-    final primaryColor = const Color.fromARGB(255, 67, 78, 177);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Ürünler', style: TextStyle(color: Colors.white)),
-        backgroundColor: primaryColor,
-        iconTheme: const IconThemeData(color: Colors.white, size: 28),
         actions: [
           IconButton(
             icon: const Icon(Icons.search, color: Colors.white),

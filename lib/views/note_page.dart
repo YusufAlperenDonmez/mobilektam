@@ -14,12 +14,9 @@ class _NotePageState extends State<NotePage> {
     final TextEditingController contextController = TextEditingController();
     final TextEditingController noteController = TextEditingController();
 
-    final primaryColor = const Color.fromARGB(255, 67, 78, 177);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Not Al', style: TextStyle(color: Colors.white)),
-        backgroundColor: primaryColor,
-        iconTheme: const IconThemeData(color: Colors.white, size: 28),
       ),
       body: Center(
         child: Column(

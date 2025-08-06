@@ -10,12 +10,9 @@ class ReportingPage extends StatefulWidget {
 class _ReportingPageState extends State<ReportingPage> {
   @override
   Widget build(BuildContext context) {
-    final primaryColor = const Color.fromARGB(255, 67, 78, 177);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Raporlama', style: TextStyle(color: Colors.white)),
-        backgroundColor: primaryColor,
-        iconTheme: const IconThemeData(color: Colors.white, size: 28),
       ),
     );
   }
