@@ -12,7 +12,7 @@ class _CustomersPageState extends State<CustomersPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Ürünler', style: TextStyle(color: Colors.white)),
+        title: const Text('Müşteriler', style: TextStyle(color: Colors.white)),
         actions: [
           IconButton(
             icon: const Icon(Icons.search, color: Colors.white),
