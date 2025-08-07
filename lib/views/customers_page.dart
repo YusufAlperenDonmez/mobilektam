@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomersPage extends StatefulWidget {
@@ -97,14 +98,20 @@ class _CustomersPageState extends State<CustomersPage> {
                   10, // TODO: Filter this count based on search if needed
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 1,
-                childAspectRatio: 3.0,
+                childAspectRatio: 2.0,
                 crossAxisSpacing: 5.0,
                 mainAxisSpacing: 7.0,
               ),
               itemBuilder: (context, index) {
                 return _CustomerCard(
-                  name: 'Customer ${index + 1}',
-                  details: 'Details ${index + 1}',
+                  companyName:
+                      '(GAÜ) NORTHERN ASSOCIATES TRADING LTD. (HORECA)',
+                  customerCode: '120.3046700',
+                  b: 5555550.0,
+                  a: 55550.0,
+                  bk: 5555550.0,
+                  email: 'jonkler@gmail.com',
+                  phone: '05345678610',
                 );
               },
             ),
@@ -116,36 +123,146 @@ class _CustomersPageState extends State<CustomersPage> {
 }
 
 class _CustomerCard extends StatelessWidget {
-  final String name;
-  final String? details;
+  final String companyName;
+  final String customerCode;
+  final double? b;
+  final double? a;
+  final double? bk;
+  final String email;
+  final String phone;
 
-  const _CustomerCard({required this.name, this.details});
+  const _CustomerCard({
+    required this.companyName,
+    required this.customerCode,
+    required this.b,
+    required this.a,
+    required this.bk,
+    required this.email,
+    required this.phone,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Material(
       elevation: 2,
       borderRadius: BorderRadius.circular(12),
-      shadowColor: Colors.black.withOpacity(0.15),
+      shadowColor: Colors.black.withValues(alpha: 0.2),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: const Color(0xFFD9D9D9),
         ),
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Icon(Icons.person, size: 32),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(name, style: const TextStyle(fontSize: 18)),
-                  if (details != null)
-                    Text(details!, style: const TextStyle(fontSize: 14)),
-                ],
-              ),
+            Row(
+              children: [
+                const Icon(CupertinoIcons.person_crop_circle, size: 40),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    companyName,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 4),
+            Text(customerCode, style: const TextStyle(fontSize: 14)),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: RichText(
+                      text: TextSpan(
+                        text: 'B: ',
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                        ),
+                        children: [
+                          TextSpan(
+                            text: b?.toStringAsFixed(3) ?? '-',
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: RichText(
+                      text: TextSpan(
+                        text: 'A: ',
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                        ),
+                        children: [
+                          TextSpan(
+                            text: a?.toStringAsFixed(3) ?? '-',
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: RichText(
+                      text: TextSpan(
+                        text: 'BK: ',
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                        ),
+                        children: [
+                          TextSpan(
+                            text: bk?.toStringAsFixed(3) ?? '-',
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text("E-mail: ", style: TextStyle(fontSize: 12)),
+                Expanded(
+                  child: Text(
+                    email,
+                    style: const TextStyle(color: Colors.red, fontSize: 12),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 4),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text("Tel: ", style: TextStyle(fontSize: 12)),
+                Expanded(
+                  child: Text(
+                    phone,
+                    style: const TextStyle(color: Colors.red, fontSize: 12),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
