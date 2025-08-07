@@ -107,9 +107,9 @@ class _CustomersPageState extends State<CustomersPage> {
                   companyName:
                       '(GAÜ) NORTHERN ASSOCIATES TRADING LTD. (HORECA)',
                   customerCode: '120.3046700',
-                  b: 5555550.0,
-                  a: 55550.0,
-                  bk: 5555550.0,
+                  b: 0.0,
+                  a: 0.0,
+                  bk: 0.0,
                   email: 'jonkler@gmail.com',
                   phone: '05345678610',
                 );
@@ -188,7 +188,7 @@ class _CustomerCard extends StatelessWidget {
                         ),
                         children: [
                           TextSpan(
-                            text: b?.toStringAsFixed(3) ?? '-',
+                            text: b?.toStringAsFixed(2) ?? '-',
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ],
@@ -208,7 +208,7 @@ class _CustomerCard extends StatelessWidget {
                         ),
                         children: [
                           TextSpan(
-                            text: a?.toStringAsFixed(3) ?? '-',
+                            text: a?.toStringAsFixed(2) ?? '-',
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ],
@@ -228,7 +228,7 @@ class _CustomerCard extends StatelessWidget {
                         ),
                         children: [
                           TextSpan(
-                            text: bk?.toStringAsFixed(3) ?? '-',
+                            text: bk?.toStringAsFixed(2) ?? '-',
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ],
