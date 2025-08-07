@@ -81,8 +81,18 @@ class _ProductPageState extends State<ProductPage> {
                 },
                 itemBuilder: (BuildContext context) {
                   return const [
-                    PopupMenuItem(value: 'option1', child: Text('Seçenek 1')),
-                    PopupMenuItem(value: 'option2', child: Text('Seçenek 2')),
+                    PopupMenuItem(
+                      value: 'option1',
+                      child: Text('Hepsini Göster'),
+                    ),
+                    PopupMenuItem(
+                      value: 'option2',
+                      child: Text('İsme Göre Filtrele'),
+                    ),
+                    PopupMenuItem(
+                      value: 'option3',
+                      child: Text('Gruba Göre Filtrele'),
+                    ),
                   ];
                 },
               ),
@@ -125,8 +135,8 @@ class _ProductCard extends StatelessWidget {
   final String? product;
   final String? code;
   final double? price;
-  final double? physicalQuantity;
-  final double? actualQuantity;
+  final int? physicalQuantity;
+  final int? actualQuantity;
 
   const _ProductCard({
     required this.description,
