@@ -33,6 +33,8 @@ class _MenuPageState extends State<MenuPage> {
       ),
     );
 
+    if (!mounted || !context.mounted) return; // ensures widget is still in tree
+
     if (confirmed == true) {
       //Navigator.of(context).pop(); // or your actual logout logic
       Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
