@@ -143,128 +143,134 @@ class _CustomerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      elevation: 2,
-      borderRadius: BorderRadius.circular(12),
-      shadowColor: Colors.black.withValues(alpha: 0.2),
-      child: Container(
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          color: const Color(0xFFD9D9D9),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                const Icon(CupertinoIcons.person_crop_circle, size: 40),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    companyName,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 4),
-            Text(customerCode, style: const TextStyle(fontSize: 14)),
-            const SizedBox(height: 8),
-            Row(
-              children: [
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: RichText(
-                      text: TextSpan(
-                        text: 'B: ',
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 12,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: b?.toStringAsFixed(2) ?? '-',
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ],
+    return GestureDetector(
+      onTap: () {
+        // TODO: Handle card tap
+        Navigator.of(context).pushNamed('/customerMain');
+      },
+      child: Material(
+        elevation: 2,
+        borderRadius: BorderRadius.circular(12),
+        shadowColor: Colors.black.withValues(alpha: 0.2),
+        child: Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: const Color(0xFFD9D9D9),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Icon(CupertinoIcons.person_crop_circle, size: 40),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      companyName,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
                       ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: RichText(
-                      text: TextSpan(
-                        text: 'A: ',
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 12,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: a?.toStringAsFixed(2) ?? '-',
-                            style: const TextStyle(fontWeight: FontWeight.bold),
+                ],
+              ),
+              const SizedBox(height: 4),
+              Text(customerCode, style: const TextStyle(fontSize: 14)),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: RichText(
+                        text: TextSpan(
+                          text: 'B: ',
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
                           ),
-                        ],
+                          children: [
+                            TextSpan(
+                              text: b?.toStringAsFixed(2) ?? '-',
+                              style: const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: RichText(
-                      text: TextSpan(
-                        text: 'BK: ',
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 12,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: bk?.toStringAsFixed(2) ?? '-',
-                            style: const TextStyle(fontWeight: FontWeight.bold),
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: RichText(
+                        text: TextSpan(
+                          text: 'A: ',
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
                           ),
-                        ],
+                          children: [
+                            TextSpan(
+                              text: a?.toStringAsFixed(2) ?? '-',
+                              style: const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text("E-mail: ", style: TextStyle(fontSize: 12)),
-                Expanded(
-                  child: Text(
-                    email,
-                    style: const TextStyle(color: Colors.red, fontSize: 12),
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: RichText(
+                        text: TextSpan(
+                          text: 'BK: ',
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
+                          ),
+                          children: [
+                            TextSpan(
+                              text: bk?.toStringAsFixed(2) ?? '-',
+                              style: const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 4),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text("Tel: ", style: TextStyle(fontSize: 12)),
-                Expanded(
-                  child: Text(
-                    phone,
-                    style: const TextStyle(color: Colors.red, fontSize: 12),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text("E-mail: ", style: TextStyle(fontSize: 12)),
+                  Expanded(
+                    child: Text(
+                      email,
+                      style: const TextStyle(color: Colors.red, fontSize: 12),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+              const SizedBox(height: 4),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text("Tel: ", style: TextStyle(fontSize: 12)),
+                  Expanded(
+                    child: Text(
+                      phone,
+                      style: const TextStyle(color: Colors.red, fontSize: 12),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
