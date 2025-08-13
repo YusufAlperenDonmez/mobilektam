@@ -37,7 +37,9 @@ class _MainAppState extends State<MainApp> {
   }
 
   Future<void> _checkServer() async {
+    print("Checking server...");
     final status = await ApiService().checkServerConnection();
+    print("Server status: ${status.serverUp}, DB: ${status.dbConnected}");
     setState(() {
       _serverReady = status.serverUp && status.dbConnected;
     });
