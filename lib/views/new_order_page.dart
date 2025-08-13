@@ -68,6 +68,7 @@ class _NewOrderPageState extends State<NewOrderPage> {
             child: InkWell(
               onTap: () {
                 // TODO: Add your action here (e.g., open product selection)
+                Navigator.of(context).pushNamed('/productSelection');
               },
               child: const Padding(
                 padding: EdgeInsets.symmetric(vertical: 8),
