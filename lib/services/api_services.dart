@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:mobilektam/models/sale_rep.dart';
+import 'package:mobilektam/models/product.dart';
 
 class ServerStatus {
   final bool serverUp;
@@ -17,14 +18,14 @@ class ApiService {
     try {
       print('Attempting to check server connection...');
       final uri = Uri.parse('$baseUrl/health');
-      print('Request URI: ' + uri.toString());
+      print('Request URI: $uri');
       final response = await http.get(uri);
-      print('Response status: ' + response.statusCode.toString());
-      print('Response body: ' + response.body);
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
 
       if (response.statusCode == 200 || response.statusCode == 503) {
         final data = jsonDecode(response.body);
-        print('Decoded response: ' + data.toString());
+        print('Decoded response: $data');
 
         bool dbConnected = data['db'] == 'connected';
         bool serverUp =
@@ -56,6 +57,19 @@ class ApiService {
       return null; // Not found
     } else {
       throw Exception('Error checking sales representative');
+    }
+  }
+
+  // Fetch products from the server
+  Future<List<Product>> fetchProducts() async {
+    final uri = Uri.parse('$baseUrl/products');
+    final response = await http.get(uri);
+
+    if (response.statusCode == 200) {
+      final List<dynamic> data = jsonDecode(response.body);
+      return data.map((json) => Product.fromJson(json)).toList();
+    } else {
+      throw Exception('Failed to fetch products');
     }
   }
 }
