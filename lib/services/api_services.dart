@@ -10,26 +10,34 @@ class ServerStatus {
 }
 
 class ApiService {
-  final String baseUrl = "http://10.0.2.2:2000/";
+  final String baseUrl = "http://192.168.2.43:2000";
 
   // Check if backend server and DB are reachable
   Future<ServerStatus> checkServerConnection() async {
     try {
+      print('Attempting to check server connection...');
       final uri = Uri.parse('$baseUrl/health');
+      print('Request URI: ' + uri.toString());
       final response = await http.get(uri);
+      print('Response status: ' + response.statusCode.toString());
+      print('Response body: ' + response.body);
 
       if (response.statusCode == 200 || response.statusCode == 503) {
         final data = jsonDecode(response.body);
+        print('Decoded response: ' + data.toString());
 
         bool dbConnected = data['db'] == 'connected';
         bool serverUp =
             response.statusCode == 200 || response.statusCode == 503;
 
+        print('dbConnected: $dbConnected, serverUp: $serverUp');
         return ServerStatus(serverUp: serverUp, dbConnected: dbConnected);
       } else {
+        print('Unexpected status code, treating as not connected.');
         return ServerStatus(serverUp: false, dbConnected: false);
       }
     } catch (e) {
+      print('Exception during server check: $e');
       return ServerStatus(serverUp: false, dbConnected: false);
     }
   }
