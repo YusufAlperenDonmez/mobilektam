@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobilektam/models/product.dart';
+import 'package:mobilektam/services/api_services.dart';
+import 'package:mobilektam/views/utility/loading_overlay.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
@@ -11,6 +14,13 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   bool _isSearching = false;
   final TextEditingController _searchController = TextEditingController();
+  Future<List<Product>>? futureData;
+
+  @override
+  void initState() {
+    super.initState();
+    futureData = ApiService().fetchProducts();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,29 +110,46 @@ class _ProductPageState extends State<ProductPage> {
         ),
         body: ScrollConfiguration(
           behavior: const ScrollBehavior().copyWith(overscroll: false),
-          child: Container(
-            color: Colors.white,
-            padding: const EdgeInsets.all(8),
-            child: GridView.builder(
-              physics: const ClampingScrollPhysics(),
-              itemCount: 10,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 1,
-                childAspectRatio: 2.0,
-                crossAxisSpacing: 5.0,
-                mainAxisSpacing: 7.0,
-              ),
-              itemBuilder: (context, index) {
-                return _ProductCard(
-                  description: '7 UP 1LT. (x12)',
-                  product: '7 UP 1 LT',
-                  code: '152 EKD-7UPET1X12',
-                  price: 309.048,
-                  physicalQuantity: 150,
-                  actualQuantity: 250,
+          child: FutureBuilder<List<Product>>(
+            future: futureData,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const LoadingOverlay(
+                  text: 'Ürünler Listeleniyor. Lütfen\nBekleyiniz',
                 );
-              },
-            ),
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Error: {snapshot.error}'));
+              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return const Center(child: Text('No products found.'));
+              }
+
+              final products = snapshot.data!;
+              return Container(
+                color: Colors.white,
+                padding: const EdgeInsets.all(8),
+                child: GridView.builder(
+                  physics: const ClampingScrollPhysics(),
+                  itemCount: products.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 1,
+                    childAspectRatio: 2.0,
+                    crossAxisSpacing: 5.0,
+                    mainAxisSpacing: 7.0,
+                  ),
+                  itemBuilder: (context, index) {
+                    final product = products[index];
+                    return _ProductCard(
+                      description: product.description ?? '',
+                      product: product.product ?? '',
+                      code: product.code ?? '',
+                      price: product.price ?? 0.0,
+                      physicalQuantity: product.physicalQuantity ?? 0,
+                      actualQuantity: product.actualQuantity ?? 0,
+                    );
+                  },
+                ),
+              );
+            },
           ),
         ),
       ),
