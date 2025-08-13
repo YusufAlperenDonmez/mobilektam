@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:mobilektam/services/api_services.dart'; // <-- Import your service
+import 'package:mobilektam/views/confirm_product_selection_page.dart';
+import 'package:mobilektam/views/customer_main_page.dart';
 import 'package:mobilektam/views/customers_page.dart';
 import 'package:mobilektam/views/data_transfer_page.dart';
 import 'package:mobilektam/views/login_page.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:mobilektam/views/new_order_page.dart';
 import 'package:mobilektam/views/note_page.dart';
+import 'package:mobilektam/views/pick_product_page.dart';
 import 'package:mobilektam/views/product_page.dart';
 import 'package:mobilektam/views/reporting_page.dart';
+import 'package:mobilektam/views/sale_orders_page.dart';
+import 'package:mobilektam/views/view_order_page.dart';
 
 void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -21,24 +28,64 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
+  bool? _serverReady;
+
   @override
   void initState() {
     super.initState();
-    // Remove splash after first frame
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      FlutterNativeSplash.remove();
+    _checkServer();
+  }
+
+  Future<void> _checkServer() async {
+    final status = await ApiService().checkServerConnection();
+    setState(() {
+      _serverReady = status.serverUp && status.dbConnected;
     });
+    FlutterNativeSplash.remove();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (_serverReady == null) {
+      // Still checking, keep splash
+      return const SizedBox.shrink();
+    }
+    if (_serverReady == false) {
+      // Show error if not connected
+      return MaterialApp(
+        home: Scaffold(
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.cloud_off, color: Colors.red, size: 64),
+                const SizedBox(height: 16),
+                const Text(
+                  'Sunucuya veya veritabanına bağlanılamadı.',
+                  style: TextStyle(fontSize: 18, color: Colors.red),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      _serverReady = null;
+                    });
+                    _checkServer();
+                  },
+                  child: const Text('Tekrar Dene'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+    // Server is ready, show app
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // ✅ Set global primary color
         primaryColor: const Color(0xFF434EB1),
-
-        // ✅ Customize app bar theme
         appBarTheme: const AppBarTheme(
           backgroundColor: Color(0xFF434EB1),
           foregroundColor: Colors.white,
@@ -61,6 +108,13 @@ class _MainAppState extends State<MainApp> {
         '/data-transfer': (context) => const DataTransferPage(),
         '/reporting': (context) => const ReportingPage(),
         '/notes': (context) => const NotePage(),
+        '/customerMain': (context) => const CustomerMainPage(),
+        '/saleOrders': (context) => const SaleOrdersPage(),
+        '/viewOrder': (context) => const ViewOrderPage(),
+        '/newOrder': (context) => const NewOrderPage(),
+        '/productSelection': (context) => const PickProductPage(),
+        '/confirmProductSelection': (context) =>
+            const ConfirmProductSelectionPage(),
       },
     );
   }
