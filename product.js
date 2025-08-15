@@ -1,14 +1,18 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
+// Define the schema for a product
 const productSchema = new mongoose.Schema({
-  description: { type: String, required: true },
-  product: { type: String },
-  code: { type: String },
-  price: { type: Number },
-  physicalQuantity: { type: Number },
-  actualQuantity: { type: Number }
+  name: { type: String, required: true },
+  price: { type: Number, required: true },
+  description: { type: String },       // optional
+  stock: { type: Number, default: 0 }  // optional
 });
 
-const Product = mongoose.model("Product", productSchema);
+// Explicitly set the collection name to 'products'
+const Product = mongoose.model(
+  'Product',      // Mongoose model name
+  productSchema,  // Schema
+  'products'      // Collection name in MongoDB
+);
 
 export default Product;
